@@ -182,7 +182,9 @@ class entbal:
         print(line_break)
 
 def eb_weights(pars, XD, bw):
-    Q = bw * np.exp(-XD.dot(pars))
+    XDP = -XD.dot(pars)
+    max_XDP = np.max(XDP)
+    Q = bw * np.exp(XDP - max_XDP)
     return Q / np.sum(Q)
 
 def eb_loss(pars, XD, bw, tars):
